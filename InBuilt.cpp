@@ -8,7 +8,7 @@ using namespace std;
 // Chessboard Dimensions
 const int BOARD_HEIGHT = 11;
 const int BOARD_WIDTH = 7;
-const float SQUARE_SIZE = 0.3f;
+const float SQUARE_SIZE = 0.03f;
 
 int main() {
     vector<Point3f> objp;
@@ -24,7 +24,7 @@ int main() {
     vector<vector<Point2f>> imgpoints; // 2D points in image plane
 
     vector<String> images;
-    glob("../data/imgs/leftcamera/*.png", images);
+    glob("data/imgs/*.png", images);
 
     if (images.empty()) {
         cerr << "No images found in the specified directory!" << endl;
@@ -52,11 +52,6 @@ int main() {
             cornerSubPix(img, corners, Size(11, 11), Size(-1, -1), TermCriteria(TermCriteria::EPS + TermCriteria::MAX_ITER, 30, 0.001));
             objpoints.push_back(objp);
             imgpoints.push_back(corners);
-
-            // Draw and display the corners
-            drawChessboardCorners(img, Size(BOARD_WIDTH, BOARD_HEIGHT), corners, found);
-            imshow("Chessboard", img);
-            waitKey(500);
         } else {
             cerr << "Chessboard corners not found in image: " << images[i] << endl;
         }
@@ -79,7 +74,7 @@ int main() {
 
     cout << "Camera Matrix:\n" << cameraMatrix << endl;
     cout << "Distortion Coefficients:\n" << distCoeffs << endl;
-    cout << "Reprojection Error: " << rms << endl;
+    cout << "RMS Error: " << rms << endl;
 
     destroyAllWindows(); // Close all OpenCV windows
     return 0;

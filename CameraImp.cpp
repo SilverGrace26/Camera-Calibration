@@ -156,7 +156,7 @@ int main() {
     const float square_size_mm = 30.0f; 
     
     std::vector<std::string> image_filenames;
-    cv::glob("../data/imgs/*.png", image_filenames); 
+    cv::glob("data/imgs/*.png", image_filenames); 
     
     if (image_filenames.empty()) {
         std::cerr << "No images found! Please update the path to your chessboard images." << std::endl;
@@ -194,7 +194,6 @@ int main() {
             
             image_points_all_cv.push_back(corners);
             world_points_all_cv.push_back(object_points_template);
-            std::cout << "Found corners in: " << filename << std::endl;
         } else {
             std::cout << "Could not find corners in: " << filename << std::endl;
         }
@@ -306,7 +305,7 @@ int main() {
                  0,  fy,   cy,
                  0,  0,    1;
 
-    std::cout << "Initial Intrinsic Matrix K:\n" << K_initial << std::endl;
+    // std::cout << "Initial Intrinsic Matrix K:\n" << K_initial << std::endl;
 
     // Stage 4 : Extract Extrinsic Parameters
     std::vector<Eigen::Matrix3d> R_initial_all;
@@ -384,7 +383,6 @@ int main() {
     Eigen::LevenbergMarquardtSpace::Status status = lm_solver.minimize(parameters);
     
     std::cout << "Optimization Status: " << status << std::endl;
-    std::cout << "Final RMS Error: " << std::sqrt(lm_solver.fvec.squaredNorm() / lm_solver.fvec.size()) << std::endl;
 
     // Extract final results
     Eigen::Matrix3d K_final;
@@ -398,9 +396,9 @@ int main() {
 
     Eigen::VectorXd dist_final = parameters.segment(num_intrinsics_params, num_distortion_params);
 
-    std::cout << "\n--- Final Results ---" << std::endl;
     std::cout << "Final Intrinsic Matrix K:\n" << K_final << std::endl;
     std::cout << "Final Distortion Coefficients (k1, k2, k3, p1, p2):\n" << dist_final.transpose() << std::endl;
+    std::cout << "Final RMS Error: " << std::sqrt(lm_solver.fvec.squaredNorm() / lm_solver.fvec.size()) << std::endl;
 
     return 0;
 }
