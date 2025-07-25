@@ -14,16 +14,14 @@ find_package(Ceres REQUIRED)
 include_directories(
     ${OpenCV_INCLUDE_DIRS}
     ${EIGEN3_INCLUDE_DIRS}
-    ${CERES_INCLUDE_DIRS}
 )
 
 #For in built implementation
 
-# add_executable(Camera InBuilt.cpp)
-# target_link_libraries(Camera
-#     ${OpenCV_LIBS}
-#     ${CERES_LIBRARIES}
-# )
+add_executable(Camera InBuilt.cpp)
+target_link_libraries(Camera
+    ${OpenCV_LIBS}
+)
 
 
 # For my implementation
@@ -35,6 +33,3 @@ target_link_libraries(CameraImp
     ${CERES_LIBRARIES}
 )
 
-# Set CUDA compiler and enable CUDA language
-set(CMAKE_CUDA_COMPILER /usr/local/cuda-12.6/bin/nvcc)
-enable_language(CUDA)

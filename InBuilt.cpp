@@ -24,7 +24,7 @@ int main() {
     vector<vector<Point2f>> imgpoints; // 2D points in image plane
 
     vector<String> images;
-    glob("data/imgs/*.png", images);
+    glob("../data/imgs/*.png", images);
 
     if (images.empty()) {
         cerr << "No images found in the specified directory!" << endl;

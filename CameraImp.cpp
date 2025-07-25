@@ -156,7 +156,7 @@ int main() {
     const float square_size_mm = 30.0f; 
     
     std::vector<std::string> image_filenames;
-    cv::glob("data/imgs/*.png", image_filenames); 
+    cv::glob("../data/imgs/*.png", image_filenames); 
     
     if (image_filenames.empty()) {
         std::cerr << "No images found! Please update the path to your chessboard images." << std::endl;
