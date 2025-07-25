@@ -1,3 +1,0 @@
-/home/ayush/Desktop/Calibration/build/CMakeFiles/CameraImp.dir
-/home/ayush/Desktop/Calibration/build/CMakeFiles/edit_cache.dir
-/home/ayush/Desktop/Calibration/build/CMakeFiles/rebuild_cache.dir
